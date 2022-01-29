@@ -30,7 +30,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:truecaller_sdk/truecaller_sdk.dart';
-import 'package:truecaller_sdk_example/non_tc_screen.dart';
+import './non_tc_screen.dart';
+
+import 'non_tc_screen.dart';
 
 void main() {
   runApp(MyApp());

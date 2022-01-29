@@ -70,23 +70,21 @@ class TruecallerSdk {
   /// [buttonShapeOptions] to set login button shape
   /// [buttonColor] to set login button color
   /// [buttonTextColor] to set login button text color
-  static initializeSDK(
-          {@required int sdkOptions,
-          int consentMode: TruecallerSdkScope.CONSENT_MODE_BOTTOMSHEET,
-          int consentTitleOptions:
-              TruecallerSdkScope.SDK_CONSENT_TITLE_GET_STARTED,
-          int footerType: TruecallerSdkScope.FOOTER_TYPE_SKIP,
-          int loginTextPrefix:
-              TruecallerSdkScope.LOGIN_TEXT_PREFIX_TO_GET_STARTED,
-          int loginTextSuffix:
-              TruecallerSdkScope.LOGIN_TEXT_SUFFIX_PLEASE_LOGIN,
-          int ctaTextPrefix: TruecallerSdkScope.CTA_TEXT_PREFIX_USE,
-          String privacyPolicyUrl: "",
-          String termsOfServiceUrl: "",
-          int buttonShapeOptions: TruecallerSdkScope.BUTTON_SHAPE_ROUNDED,
-          int buttonColor,
-          int buttonTextColor}) async =>
-      await _methodChannel.invokeMethod('initiateSDK', {
+  static Future<bool> initializeSDK(
+      {@required int sdkOptions,
+      int consentMode: TruecallerSdkScope.CONSENT_MODE_BOTTOMSHEET,
+      int consentTitleOptions: TruecallerSdkScope.SDK_CONSENT_TITLE_GET_STARTED,
+      int footerType: TruecallerSdkScope.FOOTER_TYPE_SKIP,
+      int loginTextPrefix: TruecallerSdkScope.LOGIN_TEXT_PREFIX_TO_GET_STARTED,
+      int loginTextSuffix: TruecallerSdkScope.LOGIN_TEXT_SUFFIX_PLEASE_LOGIN,
+      int ctaTextPrefix: TruecallerSdkScope.CTA_TEXT_PREFIX_USE,
+      String privacyPolicyUrl: "",
+      String termsOfServiceUrl: "",
+      int buttonShapeOptions: TruecallerSdkScope.BUTTON_SHAPE_ROUNDED,
+      int buttonColor,
+      int buttonTextColor}) async {
+    try {
+      final result = await _methodChannel.invokeMethod('initiateSDK', {
         "sdkOptions": sdkOptions,
         "consentMode": consentMode,
         "consentTitleOptions": consentTitleOptions,
@@ -100,6 +98,16 @@ class TruecallerSdk {
         "buttonColor": buttonColor,
         "buttonTextColor": buttonTextColor,
       });
+      debugPrint(result.toString());
+      return true;
+    } on PlatformException catch (e) {
+      //error happened in the call; comes when plugin class is not registered
+      return false;
+    } on MissingPluginException catch (e) {
+      assert(false, "the truecaller plugin in not registered");
+      return false;
+    }
+  }
 
   /// Once you initialise the Truecaller SDK using the [initializeSDK] method, and if you are using
   /// the SDK for verification of only Truecaller users ( by setting the sdkOptions scope as
