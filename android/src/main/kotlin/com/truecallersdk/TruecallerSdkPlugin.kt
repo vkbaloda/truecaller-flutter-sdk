@@ -116,7 +116,7 @@ public class TruecallerSdkPlugin : FlutterPlugin, MethodCallHandler, EventChanne
             INITIATE_SDK -> {
                 getTrueScope(call)?.let {
                     TruecallerSDK.init(it)
-                    result.success("SUCCESSFUL")
+                    result.success(TruecallerSDK.getInstance() != null)
                 } ?: result.error("UNAVAILABLE", "Activity not available.", null)
             }
             IS_USABLE -> {

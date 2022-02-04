@@ -84,7 +84,7 @@ class TruecallerSdk {
       int buttonColor,
       int buttonTextColor}) async {
     try {
-      final result = await _methodChannel.invokeMethod('initiateSDK', {
+      final result = await _methodChannel.invokeMethod<bool>('initiateSDK', {
         "sdkOptions": sdkOptions,
         "consentMode": consentMode,
         "consentTitleOptions": consentTitleOptions,
@@ -99,7 +99,7 @@ class TruecallerSdk {
         "buttonTextColor": buttonTextColor,
       });
       debugPrint(result.toString());
-      return true;
+      return result;
     } on PlatformException catch (e) {
       //error happened in the call; comes when plugin class is not registered
       return false;
