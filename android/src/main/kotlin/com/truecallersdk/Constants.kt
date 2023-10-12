@@ -28,7 +28,7 @@
  * PRODUCT YOU ARE ASSUMING THE ENTIRE RISK AS TO ITS QUALITY AND PERFORMANCE.
  */
 
-package com.truecallersdk
+package com.truecallers
 
 class Constants {
     companion object {

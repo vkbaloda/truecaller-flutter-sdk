@@ -28,7 +28,7 @@
  * PRODUCT YOU ARE ASSUMING THE ENTIRE RISK AS TO ITS QUALITY AND PERFORMANCE.
  */
 
-package com.truecallersdk
+package com.truecallers
 
 import android.app.Activity
 import android.content.Intent
